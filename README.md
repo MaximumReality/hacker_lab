@@ -5,6 +5,7 @@
 ![Security](https://img.shields.io/badge/ENCRYPTION-DR_AZUL_LEVEL-ff00ff?style=for-the-badge)
 
 > "We are the signal in the noise. We are the ghosts in the machine."
+![Views](https://komarev.com/ghpvc/?username=MaximumReality-HackerLab&color=00e5ff&style=for-the-badge&label=GHOST_VISITS)
 
 ## 📡 MISSION STATEMENT
 The **Ghost Lab** is a decentralized headquarters for the digital defense initiatives of **Maximum Reality**. Our mission is the identification, disruption, and neutralization of predatory dark-web nodes. 
