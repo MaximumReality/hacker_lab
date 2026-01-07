@@ -121,15 +121,6 @@
     </button>
 </div>
 
-<div class="mission-card" style="border-left-color: var(--blue);">
-    <div class="mission-title" style="color:var(--blue);">📡 SUBMIT_INTEL: ANONYMOUS_TIP_LINE</div>
-    <div style="display: flex; gap: 5px;">
-        <input type="text" id="intel-input" placeholder="TARGET_URL..." style="flex:2; background:#111; border:1px solid var(--blue); color:var(--blue); padding:8px; font-size:10px; outline:none;">
-        <button onclick="submitIntel()" style="flex:1; background:var(--blue); border:none; color:#000; font-family:'Courier New'; font-weight:bold; font-size:10px;">[ SEND ]</button>
-    </div>
-    <div id="intel-status" style="margin-top:10px; font-size:9px; color:var(--blue); display:none;"></div>
-</div>
-
     <div class="mission-card" style="border-left-color: #555; background: rgba(255, 255, 255, 0.02);">
     <div class="mission-title" style="color: #fff;">[⚓] OP: SEA_GHOST</div>
     <div class="mission-details">
@@ -145,6 +136,15 @@
     <button class="btn-ui" onclick="toggleVid('vid-narcos')">
         [ VIEW_DECRYPTED_LOGISTICS ]
     </button>
+</div>
+
+    <div class="mission-card" style="border-left-color: var(--blue);">
+    <div class="mission-title" style="color:var(--blue);">📡 SUBMIT_INTEL: ANONYMOUS_TIP_LINE</div>
+    <div style="display: flex; gap: 5px;">
+        <input type="text" id="intel-input" placeholder="TARGET_URL..." style="flex:2; background:#111; border:1px solid var(--blue); color:var(--blue); padding:8px; font-size:10px; outline:none;">
+        <button onclick="submitIntel()" style="flex:1; background:var(--blue); border:none; color:#000; font-family:'Courier New'; font-weight:bold; font-size:10px;">[ SEND ]</button>
+    </div>
+    <div id="intel-status" style="margin-top:10px; font-size:9px; color:var(--blue); display:none;"></div>
 </div>
 
 <div id="sound-toggle" onclick="toggleMute()">🔈 Sound: ON</div>
