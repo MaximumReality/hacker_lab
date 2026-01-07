@@ -18,7 +18,11 @@
         
         .tag { display: inline-block; border: 1px solid var(--alert-red); padding: 2px 8px; font-size: 9px; margin-top: 10px; color: var(--alert-red); }
         .evidence-player { width: 100%; margin-top: 15px; border: 1px solid #333; background: #000; }
-        
+        .evidence-player {
+    filter: sepia(20%) contrast(120%) brightness(90%); /* Gives it a gritty, aged look */
+    image-rendering: pixelated; /* Keeps the low-res edges sharp and digital */
+}
+
         #sound-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 10001; background: rgba(0,0,0,0.8); border: 1px solid var(--alert-red); color: var(--alert-red); padding: 8px; font-size: 10px; cursor: pointer; }
         .btn-ui { width: 100%; background: none; border: 1px solid var(--terminal-white); color: var(--terminal-white); font-family: 'Courier New'; padding: 8px; font-size: 10px; margin-top: 5px; cursor: pointer; }
     </style>
