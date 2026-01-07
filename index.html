@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GHOST_LAB | VIGILANTE_SECTOR</title>
     <style>
-        :root { --alert-red: #ff3131; --terminal-white: #e0e0e0; --bg-deep: #050505; }
+        :root { --alert-red: #ff3131; --terminal-white: #e0e0e0; --bg-deep: #050505; --blue: #00e5ff; }
         * { margin:0; padding:0; box-sizing: border-box; background: var(--bg-deep); }
-        body { font-family: 'Courier New', monospace; color: var(--terminal-white); padding: 20px; border: 1px solid #1a1a1a; }
+        body { font-family: 'Courier New', monospace; color: var(--terminal-white); padding: 20px; border: 1px solid #1a1a1a; overflow-x: hidden; }
         
         .lab-header { border-bottom: 2px solid var(--alert-red); padding-bottom: 15px; margin-bottom: 30px; }
         .glitch-red { color: var(--alert-red); text-shadow: 1px 1px #fff; font-weight: 900; letter-spacing: 2px; }
@@ -19,109 +19,78 @@
         .tag { display: inline-block; border: 1px solid var(--alert-red); padding: 2px 8px; font-size: 9px; margin-top: 10px; color: var(--alert-red); }
         
         #scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%); background-size: 100% 4px; pointer-events: none; z-index: 100; }
+        
         #sound-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10001; /* Above everything */
-    background: rgba(0,0,0,0.8);
-    border: 1px solid var(--alert-red);
-    color: var(--alert-red);
-    padding: 8px;
-    font-size: 10px;
-    cursor: pointer;
-    font-family: 'Courier New', monospace;
-    text-transform: uppercase;
-}
+            position: fixed; bottom: 20px; right: 20px; z-index: 10001; 
+            background: rgba(0,0,0,0.8); border: 1px solid var(--alert-red);
+            color: var(--alert-red); padding: 8px; font-size: 10px; cursor: pointer;
+        }
 
+        /* Video evidence styling */
+        .evidence-player { width: 100%; margin-top: 15px; border: 1px solid #333; background: #000; }
+        .play-btn { 
+            width: 100%; background: none; border: 1px solid var(--terminal-white); 
+            color: var(--terminal-white); font-family: 'Courier New'; padding: 8px; 
+            font-size: 10px; margin-top: 5px; cursor: pointer; 
+        }
     </style>
 </head>
 <body>
 
 <div id="meta-splash" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:10000; display:flex; flex-direction:column; align-items:center; justify-content:center; transition: opacity 1.5s ease-out;">
     <div style="width:100%; max-width:400px; text-align:center; padding:20px;">
-        <h2 style="color:#00e5ff; font-family:'Courier New'; font-size:12px; margin-bottom:15px; letter-spacing:2px;">[!] UPLINK_ESTABLISHED: WELCOME_CREATOR</h2>
+        <h2 style="color:var(--blue); font-family:'Courier New'; font-size:12px; margin-bottom:15px; letter-spacing:2px;">[!] UPLINK_ESTABLISHED: WELCOME_CREATOR</h2>
         
         <div style="position:relative; padding-bottom:177.77%; height:0; overflow:hidden;">
-            <iframe style="position:absolute; top:0; left:0; width:100%; height:100%;" 
-                src="https://www.youtube.com/embed/LR8qN6dCgs8?autoplay=1&mute=1&controls=0&modestbranding=1" 
+            <iframe id="intro-vid" style="position:absolute; top:0; left:0; width:100%; height:100%;" 
+                src="https://www.youtube.com/embed/LR8qN6dCgs8?autoplay=1&mute=0&controls=0&modestbranding=1&enablejsapi=1" 
                 frameborder="0" allow="autoplay; encrypted-media">
             </iframe>
         </div>
 
-        <button onclick="document.getElementById('meta-splash').style.opacity='0'; setTimeout(()=>{document.getElementById('meta-splash').remove();}, 1500)" 
+        <button onclick="initiateHackerLab()" 
                 style="margin-top:25px; background:none; border:1px solid #ff00ff; color:#ff00ff; padding:10px 20px; font-family:'Courier New'; font-weight:bold; cursor:pointer;">
             [ ENTER_MAXIMUM_REALITY ]
         </button>
     </div>
 </div>
 
-    <div id="scanline"></div>
+<div id="scanline"></div>
 
-    <div class="lab-header">
-        <h1 class="glitch-red">👻 GHOST_LAB_V1.0</h1>
-        <p style="font-size: 9px; opacity: 0.6;">[ SECTOR: ETHICAL_TAKEDOWNS ]</p>
+<div class="lab-header">
+    <h1 class="glitch-red">👻 GHOST_LAB_V1.0</h1>
+    <p style="font-size: 9px; opacity: 0.6;">[ SECTOR: ETHICAL_TAKEDOWNS ]</p>
+</div>
+
+<div class="mission-card">
+    <div class="mission-title">OP: SILENCE_SCAM_VOICE</div>
+    <div class="mission-details">
+        Analyzed VOIP patterns originating from Sector 4. Identified illegal predatory call center. 
+        Initiated 'Ghost Packet' flood. System neutralized. 4,000+ potential victims protected.
     </div>
+    <div class="tag">TARGET: SCAM_CENTER</div>
+    <div class="tag">RESULT: OFFLINE</div>
+</div>
 
-    <div class="mission-card">
-        <div class="mission-title">OP: SILENCE_SCAM_VOICE</div>
-        <div class="mission-details">
-            Analyzed VOIP patterns originating from Sector 4. Identified illegal predatory call center. 
-            Initiated 'Ghost Packet' flood. System neutralized. 4,000+ potential victims protected.
-        </div>
-        <div class="tag">TARGET: SCAM_CENTER</div>
-        <div class="tag">RESULT: OFFLINE</div>
+<div class="mission-card" style="border-left: 5px solid #fff;">
+    <div class="mission-title" style="color: #fff;">[!] DATA_EXPOSURE: TRAFFIC_HACK</div>
+    <div class="mission-details">
+        Intercepted dark-web logistics hub managing illegal trafficking routes. 
+        Dr. Azul bypassed the mainframe encryption. Visual evidence decrypted.
     </div>
+    <div class="tag" style="border-color:#fff; color:#fff;">TARGET: LOGISTICS_HUB</div>
+    
+    <video id="evidence-video" class="evidence-player" playsinline>
+        <source src="https://github.com/MaximumReality/hacker_lab/raw/main/traffic_hack.mp4" type="video/mp4">
+    </video>
+    <button class="play-btn" onclick="toggleEvidence()">[ VIEW_DECRYPTED_FEED ]</button>
+</div>
 
-        <div class="mission-card" style="border-left: 5px solid #fff;">
-        <div class="mission-title" style="color: #fff;">[!] DATA_EXPOSURE: TRAFFIC_HACK</div>
-        <div class="mission-details">
-            Intercepted dark-web logistics hub managing illegal trafficking routes. 
-            Dr. Azul bypassed the mainframe encryption while I initiated the 'Traffic Hack' sequence. 
-            Visual evidence of the breach is now decrypted.
-        </div>
-        <div class="tag" style="border-color:#fff; color:#fff;">TARGET: LOGISTICS_HUB</div>
-        
-        <a href="https://github.com/MaximumReality/hacker_lab/raw/main/traffic_hack.mp4" 
-           class="btn" 
-           style="display:inline-block; margin-top:15px; border:1px solid #fff; color:#fff; text-decoration:none; padding:5px 15px; font-size:10px;">
-           [ WATCH_TAKEDOWN_FOOTAGE ]
-        </a>
-    </div>
-
-
-    <div style="text-align: center; padding: 40px 0;">
-        <a href="https://maximumreality.github.io/backdoor/" style="color:var(--alert-red); text-decoration: none; font-size: 10px;">[ RETURN_TO_BACKDOOR ]</a>
-    </div>
-    <script>
-    function initiateHackerLab() {
-        // Create audio context for a synthesized 'hacker' beep
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-
-        oscillator.type = 'square'; // 'Square' gives that retro 8-bit hacker feel
-        oscillator.frequency.setValueAtTime(880, audioCtx.currentTime); // High pitch A5
-        oscillator.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.5); // Slide down
-
-        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        oscillator.start();
-        oscillator.stop(audioCtx.currentTime + 0.5);
-
-        // Hide the splash screen
-        const splash = document.getElementById('meta-splash');
-        splash.style.opacity = '0';
-        setTimeout(() => {
-            splash.remove();
-        }, 1500);
-    }
-</script>
 <div id="sound-toggle" onclick="toggleMute()">🔈 Sound: ON</div>
+
+<div style="text-align: center; padding: 40px 0;">
+    <a href="https://maximumreality.github.io/backdoor/" style="color:var(--alert-red); text-decoration: none; font-size: 10px;">[ RETURN_TO_BACKDOOR ]</a>
+</div>
 
 <script>
     let isMuted = false;
@@ -129,44 +98,52 @@
     function toggleMute() {
         isMuted = !isMuted;
         const btn = document.getElementById('sound-toggle');
-        const iframe = document.querySelector('iframe');
+        const iframe = document.getElementById('intro-vid');
+        const evidenceVid = document.getElementById('evidence-video');
         
         if (isMuted) {
             btn.innerText = "🔇 Sound: OFF";
-            btn.style.borderColor = "#666";
-            btn.style.color = "#666";
-            // Logic to mute the YouTube iframe
+            btn.style.borderColor = "#666"; btn.style.color = "#666";
             iframe.src = iframe.src.replace("mute=0", "mute=1");
+            evidenceVid.muted = true;
         } else {
             btn.innerText = "🔈 Sound: ON";
-            btn.style.borderColor = "var(--alert-red)";
-            btn.style.color = "var(--alert-red)";
+            btn.style.borderColor = "var(--alert-red)"; btn.style.color = "var(--alert-red)";
             iframe.src = iframe.src.replace("mute=1", "mute=0");
+            evidenceVid.muted = false;
         }
     }
 
-    // Update your existing initiateHackerLab to respect the mute state
     function initiateHackerLab() {
         if (!isMuted) {
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            oscillator.type = 'square';
-            oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.5);
-            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            oscillator.start();
-            oscillator.stop(audioCtx.currentTime + 0.5);
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.5);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.5);
         }
-
         const splash = document.getElementById('meta-splash');
         splash.style.opacity = '0';
         setTimeout(() => { splash.remove(); }, 1500);
     }
-</script>
 
+    function toggleEvidence() {
+        const v = document.getElementById('evidence-video');
+        const btn = event.target;
+        if (v.paused) {
+            v.play();
+            v.muted = isMuted;
+            btn.innerText = "[ PAUSE_FEED ]";
+        } else {
+            v.pause();
+            btn.innerText = "[ VIEW_DECRYPTED_FEED ]";
+        }
+    }
+</script>
 </body>
 </html>
