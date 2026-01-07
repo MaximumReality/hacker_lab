@@ -78,6 +78,39 @@
         Intercepted dark-web logistics hub managing illegal trafficking routes. 
         Dr. Azul bypassed the mainframe encryption. Visual evidence decrypted.
     </div>
+
+    <div class="mission-card" style="border-left: 5px solid var(--alert-red); background: rgba(255, 49, 49, 0.05);">
+    <div class="mission-title">[!!] CRITICAL_TAKEDOWN: OP_DARK_MIRROR</div>
+    <div class="mission-details">
+        TARGET: Onion-routed snuff server (Sector_88). 
+        ACTION: Dr. Azul initiated a 'Deep-Packet Injection' to reveal the host origin. 
+        RESULT: Server scrubbed. DNS poisoned. Digital Ghost protocol applied to all admin accounts.
+    </div>
+    <div class="tag" style="background: var(--alert-red); color: #000; font-weight: bold;">TYPE: DEEP_WEB_CRIME</div>
+    
+    <video id="snuff-video" class="evidence-player" playsinline style="border-color: var(--alert-red);">
+        <source src="https://github.com/MaximumReality/hacker_lab/raw/main/snuff.mp4" type="video/mp4">
+    </video>
+    <button class="play-btn" onclick="toggleSnuff()" style="border-color: var(--alert-red); color: var(--alert-red);">
+        [ ACCESS_RECOVERY_FOOTAGE ]
+    </button>
+</div>
+
+<script>
+    function toggleSnuff() {
+        const v = document.getElementById('snuff-video');
+        const btn = event.target;
+        if (v.paused) {
+            v.play();
+            v.muted = isMuted;
+            btn.innerText = "[ PAUSE_FEED ]";
+        } else {
+            v.pause();
+            btn.innerText = "[ ACCESS_RECOVERY_FOOTAGE ]";
+        }
+    }
+</script>
+
     <div class="tag" style="border-color:#fff; color:#fff;">TARGET: LOGISTICS_HUB</div>
     
     <video id="evidence-video" class="evidence-player" playsinline>
