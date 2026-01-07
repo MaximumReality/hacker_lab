@@ -19,6 +19,21 @@
         .tag { display: inline-block; border: 1px solid var(--alert-red); padding: 2px 8px; font-size: 9px; margin-top: 10px; color: var(--alert-red); }
         
         #scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%); background-size: 100% 4px; pointer-events: none; z-index: 100; }
+        #sound-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10001; /* Above everything */
+    background: rgba(0,0,0,0.8);
+    border: 1px solid var(--alert-red);
+    color: var(--alert-red);
+    padding: 8px;
+    font-size: 10px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+}
+
     </style>
 </head>
 <body>
@@ -104,6 +119,52 @@
         setTimeout(() => {
             splash.remove();
         }, 1500);
+    }
+</script>
+<div id="sound-toggle" onclick="toggleMute()">🔈 Sound: ON</div>
+
+<script>
+    let isMuted = false;
+
+    function toggleMute() {
+        isMuted = !isMuted;
+        const btn = document.getElementById('sound-toggle');
+        const iframe = document.querySelector('iframe');
+        
+        if (isMuted) {
+            btn.innerText = "🔇 Sound: OFF";
+            btn.style.borderColor = "#666";
+            btn.style.color = "#666";
+            // Logic to mute the YouTube iframe
+            iframe.src = iframe.src.replace("mute=0", "mute=1");
+        } else {
+            btn.innerText = "🔈 Sound: ON";
+            btn.style.borderColor = "var(--alert-red)";
+            btn.style.color = "var(--alert-red)";
+            iframe.src = iframe.src.replace("mute=1", "mute=0");
+        }
+    }
+
+    // Update your existing initiateHackerLab to respect the mute state
+    function initiateHackerLab() {
+        if (!isMuted) {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.type = 'square';
+            oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.5);
+            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.5);
+        }
+
+        const splash = document.getElementById('meta-splash');
+        splash.style.opacity = '0';
+        setTimeout(() => { splash.remove(); }, 1500);
     }
 </script>
 
