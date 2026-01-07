@@ -88,6 +88,24 @@
 
 <div id="sound-toggle" onclick="toggleMute()">🔈 Sound: ON</div>
 
+<div class="mission-card" style="border-left: 5px solid var(--blue); margin-top: 50px;">
+    <div class="mission-title" style="color: var(--blue);">📡 SUBMIT_INTEL: ANONYMOUS_TIP_LINE</div>
+    <div class="mission-details" style="margin-bottom: 15px;">
+        Detected a Dark Web node? Found a scam center? Enter the target URL or Sector ID below. 
+        Dr. Azul will begin decryption upon receipt.
+    </div>
+    
+    <div style="display: flex; gap: 10px;">
+        <input type="text" id="intel-input" placeholder="TARGET_URL_OR_ID..." 
+            style="flex: 2; background: #111; border: 1px solid var(--blue); color: var(--blue); padding: 10px; font-family: 'Courier New'; font-size: 10px; outline: none;">
+        <button onclick="submitIntel()" 
+            style="flex: 1; background: var(--blue); border: none; color: #000; font-family: 'Courier New'; font-weight: bold; cursor: pointer; font-size: 10px;">
+            [ SEND_INTEL ]
+        </button>
+    </div>
+    <div id="intel-status" style="margin-top: 10px; font-size: 9px; color: var(--blue); display: none;"></div>
+</div>
+
 <div style="text-align: center; padding: 40px 0;">
     <a href="https://maximumreality.github.io/backdoor/" style="color:var(--alert-red); text-decoration: none; font-size: 10px;">[ RETURN_TO_BACKDOOR ]</a>
 </div>
@@ -144,6 +162,28 @@
             btn.innerText = "[ VIEW_DECRYPTED_FEED ]";
         }
     }
+
+        function submitIntel() {
+        const input = document.getElementById('intel-input');
+        const status = document.getElementById('intel-status');
+        
+        if (input.value.length < 3) return;
+
+        // Play the hacker beep if sound is ON
+        if (!isMuted) initiateHackerLab();
+
+        status.style.display = 'block';
+        status.innerText = "> UPLOADING_INTEL...";
+        
+        setTimeout(() => {
+            status.innerText = "> DATA_RECEIVED. ENCRYPTING_ORIGIN_IP...";
+            setTimeout(() => {
+                status.innerText = "> SUCCESS: DR. AZUL HAS ADDED TARGET TO THE QUEUE. 🐾";
+                input.value = "";
+            }, 2000);
+        }, 1500);
+    }
+
 </script>
 </body>
 </html>
