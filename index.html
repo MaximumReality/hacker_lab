@@ -70,5 +70,34 @@
     <div style="text-align: center; padding: 40px 0;">
         <a href="https://maximumreality.github.io/backdoor/" style="color:var(--alert-red); text-decoration: none; font-size: 10px;">[ RETURN_TO_BACKDOOR ]</a>
     </div>
+    <script>
+    function initiateHackerLab() {
+        // Create audio context for a synthesized 'hacker' beep
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        oscillator.type = 'square'; // 'Square' gives that retro 8-bit hacker feel
+        oscillator.frequency.setValueAtTime(880, audioCtx.currentTime); // High pitch A5
+        oscillator.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.5); // Slide down
+
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.5);
+
+        // Hide the splash screen
+        const splash = document.getElementById('meta-splash');
+        splash.style.opacity = '0';
+        setTimeout(() => {
+            splash.remove();
+        }, 1500);
+    }
+</script>
+
 </body>
 </html>
