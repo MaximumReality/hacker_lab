@@ -180,6 +180,19 @@
 </div>
 
 </div>
+
+    <div style="margin: 20px 0; padding: 10px; border: 1px dashed #333; font-size: 8px; color: #555; text-align: left; overflow: hidden;">
+    <p>[ SESSION_ENCRYPTION_KEY ]: <span id="session-key">GENERATING...</span></p>
+    <p>[ UPLINK_STRENGTH ]: 100% (STABLE)</p>
+    <p>[ LOCATION ]: CLOAKED_BY_AZUL_PROTOCOL</p>
+</div>
+
+<script>
+    // This generates a random "Hacker Key" every time you load the page
+    const key = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    document.getElementById('session-key').innerText = key.toUpperCase();
+</script>
+
 <div style="text-align: center; padding: 40px 0; margin-bottom: 60px;">
     <a href="https://maximumreality.github.io/backdoor/" 
        style="color: var(--alert-red); text-decoration: none; font-size: 10px; border: 1px solid var(--alert-red); padding: 10px 20px; letter-spacing: 2px;">
