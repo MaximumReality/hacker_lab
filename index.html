@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GHOST_LAB | VIGILANTE_SECTOR</title>
     <style>
-        :root { --alert-red: #ff3131; --terminal-white: #e0e0e0; --bg-deep: #050505; --blue: #00e5ff; }
+        :root { --alert-red: #ff3131; --terminal-white: #e0e0e0; --bg-deep: #050505; --blue: #00e5ff; --pink: #ff00ff; }
         * { margin:0; padding:0; box-sizing: border-box; background: var(--bg-deep); }
         body { font-family: 'Courier New', monospace; color: var(--terminal-white); padding: 20px; border: 1px solid #1a1a1a; overflow-x: hidden; }
         
@@ -17,131 +17,55 @@
         .mission-details { font-size: 11px; line-height: 1.6; color: #aaa; }
         
         .tag { display: inline-block; border: 1px solid var(--alert-red); padding: 2px 8px; font-size: 9px; margin-top: 10px; color: var(--alert-red); }
-        
-        #scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%); background-size: 100% 4px; pointer-events: none; z-index: 100; }
-        
-        #sound-toggle {
-            position: fixed; bottom: 20px; right: 20px; z-index: 10001; 
-            background: rgba(0,0,0,0.8); border: 1px solid var(--alert-red);
-            color: var(--alert-red); padding: 8px; font-size: 10px; cursor: pointer;
-        }
-
-        /* Video evidence styling */
         .evidence-player { width: 100%; margin-top: 15px; border: 1px solid #333; background: #000; }
-        .play-btn { 
-            width: 100%; background: none; border: 1px solid var(--terminal-white); 
-            color: var(--terminal-white); font-family: 'Courier New'; padding: 8px; 
-            font-size: 10px; margin-top: 5px; cursor: pointer; 
-        }
+        
+        #sound-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 10001; background: rgba(0,0,0,0.8); border: 1px solid var(--alert-red); color: var(--alert-red); padding: 8px; font-size: 10px; cursor: pointer; }
+        .btn-ui { width: 100%; background: none; border: 1px solid var(--terminal-white); color: var(--terminal-white); font-family: 'Courier New'; padding: 8px; font-size: 10px; margin-top: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div id="meta-splash" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:10000; display:flex; flex-direction:column; align-items:center; justify-content:center; transition: opacity 1.5s ease-out;">
     <div style="width:100%; max-width:400px; text-align:center; padding:20px;">
-        <h2 style="color:var(--blue); font-family:'Courier New'; font-size:12px; margin-bottom:15px; letter-spacing:2px;">[!] UPLINK_ESTABLISHED: WELCOME_CREATOR</h2>
-        
+        <h2 style="color:var(--blue); font-size:12px; margin-bottom:15px; letter-spacing:2px;">[!] UPLINK_ESTABLISHED: WELCOME_CREATOR</h2>
         <div style="position:relative; padding-bottom:177.77%; height:0; overflow:hidden;">
             <iframe id="intro-vid" style="position:absolute; top:0; left:0; width:100%; height:100%;" 
-                src="https://www.youtube.com/embed/LR8qN6dCgs8?autoplay=1&mute=0&controls=0&modestbranding=1&enablejsapi=1" 
-                frameborder="0" allow="autoplay; encrypted-media">
-            </iframe>
+                src="https://www.youtube.com/embed/LR8qN6dCgs8?autoplay=1&mute=0&controls=0&enablejsapi=1" 
+                frameborder="0" allow="autoplay; encrypted-media"></iframe>
         </div>
-
-        <button onclick="initiateHackerLab()" 
-                style="margin-top:25px; background:none; border:1px solid #ff00ff; color:#ff00ff; padding:10px 20px; font-family:'Courier New'; font-weight:bold; cursor:pointer;">
-            [ ENTER_MAXIMUM_REALITY ]
-        </button>
+        <button onclick="initiateHackerLab()" style="margin-top:25px; background:none; border:1px solid var(--pink); color:var(--pink); padding:10px 20px; font-family:'Courier New'; font-weight:bold; cursor:pointer;">[ ENTER_MAXIMUM_REALITY ]</button>
     </div>
 </div>
 
-<div id="scanline"></div>
-
 <div class="lab-header">
-    <h1 class="glitch-red">👻 GHOST_LAB_V1.0</h1>
+    <h1 class="glitch-red">👻 GHOST_LAB_V1.2</h1>
     <p style="font-size: 9px; opacity: 0.6;">[ SECTOR: ETHICAL_TAKEDOWNS ]</p>
 </div>
 
-<div class="mission-card">
-    <div class="mission-title">OP: SILENCE_SCAM_VOICE</div>
-    <div class="mission-details">
-        Analyzed VOIP patterns originating from Sector 4. Identified illegal predatory call center. 
-        Initiated 'Ghost Packet' flood. System neutralized. 4,000+ potential victims protected.
-    </div>
-    <div class="tag">TARGET: SCAM_CENTER</div>
-    <div class="tag">RESULT: OFFLINE</div>
+<div class="mission-card" style="border-left-color: var(--alert-red); background: rgba(255,0,0,0.05);">
+    <div class="mission-title">[!!] CRITICAL: OP_DARK_MIRROR</div>
+    <div class="mission-details">TARGET: Onion-routed snuff server (Sector_88). Azul identified the host origin. Result: DNS Poisoned. Server Neutralized.</div>
+    <video id="vid-snuff" class="evidence-player" playsinline><source src="https://github.com/MaximumReality/hacker_lab/raw/main/snuff.mp4" type="video/mp4"></video>
+    <button class="btn-ui" onclick="toggleVid('vid-snuff')">[ VIEW_NEUTRALIZATION_LOG ]</button>
 </div>
 
-<div class="mission-card" style="border-left: 5px solid #fff;">
-    <div class="mission-title" style="color: #fff;">[!] DATA_EXPOSURE: TRAFFIC_HACK</div>
-    <div class="mission-details">
-        Intercepted dark-web logistics hub managing illegal trafficking routes. 
-        Dr. Azul bypassed the mainframe encryption. Visual evidence decrypted.
-    </div>
-
-    <div class="mission-card" style="border-left: 5px solid var(--alert-red); background: rgba(255, 49, 49, 0.05);">
-    <div class="mission-title">[!!] CRITICAL_TAKEDOWN: OP_DARK_MIRROR</div>
-    <div class="mission-details">
-        TARGET: Onion-routed snuff server (Sector_88). 
-        ACTION: Dr. Azul initiated a 'Deep-Packet Injection' to reveal the host origin. 
-        RESULT: Server scrubbed. DNS poisoned. Digital Ghost protocol applied to all admin accounts.
-    </div>
-    <div class="tag" style="background: var(--alert-red); color: #000; font-weight: bold;">TYPE: DEEP_WEB_CRIME</div>
-    
-    <video id="snuff-video" class="evidence-player" playsinline style="border-color: var(--alert-red);">
-        <source src="https://github.com/MaximumReality/hacker_lab/raw/main/snuff.mp4" type="video/mp4">
-    </video>
-    <button class="play-btn" onclick="toggleSnuff()" style="border-color: var(--alert-red); color: var(--alert-red);">
-        [ ACCESS_RECOVERY_FOOTAGE ]
-    </button>
+<div class="mission-card" style="border-left-color: #fff;">
+    <div class="mission-title" style="color:#fff;">[!] DATA_EXPOSURE: TRAFFIC_HACK</div>
+    <div class="mission-details">Intercepted dark-web logistics hub. Traffic routes rerouted to void. Visual evidence decrypted.</div>
+    <video id="vid-traffic" class="evidence-player" playsinline><source src="https://github.com/MaximumReality/hacker_lab/raw/main/traffic_hack.mp4" type="video/mp4"></video>
+    <button class="btn-ui" onclick="toggleVid('vid-traffic')">[ VIEW_TRAFFIC_BREACH ]</button>
 </div>
 
-<script>
-    function toggleSnuff() {
-        const v = document.getElementById('snuff-video');
-        const btn = event.target;
-        if (v.paused) {
-            v.play();
-            v.muted = isMuted;
-            btn.innerText = "[ PAUSE_FEED ]";
-        } else {
-            v.pause();
-            btn.innerText = "[ ACCESS_RECOVERY_FOOTAGE ]";
-        }
-    }
-</script>
-
-    <div class="tag" style="border-color:#fff; color:#fff;">TARGET: LOGISTICS_HUB</div>
-    
-    <video id="evidence-video" class="evidence-player" playsinline>
-        <source src="https://github.com/MaximumReality/hacker_lab/raw/main/traffic_hack.mp4" type="video/mp4">
-    </video>
-    <button class="play-btn" onclick="toggleEvidence()">[ VIEW_DECRYPTED_FEED ]</button>
+<div class="mission-card" style="border-left-color: var(--blue);">
+    <div class="mission-title" style="color:var(--blue);">📡 SUBMIT_INTEL: ANONYMOUS_TIP_LINE</div>
+    <div style="display: flex; gap: 5px;">
+        <input type="text" id="intel-input" placeholder="TARGET_URL..." style="flex:2; background:#111; border:1px solid var(--blue); color:var(--blue); padding:8px; font-size:10px; outline:none;">
+        <button onclick="submitIntel()" style="flex:1; background:var(--blue); border:none; color:#000; font-family:'Courier New'; font-weight:bold; font-size:10px;">[ SEND ]</button>
+    </div>
+    <div id="intel-status" style="margin-top:10px; font-size:9px; color:var(--blue); display:none;"></div>
 </div>
 
 <div id="sound-toggle" onclick="toggleMute()">🔈 Sound: ON</div>
-
-<div class="mission-card" style="border-left: 5px solid var(--blue); margin-top: 50px;">
-    <div class="mission-title" style="color: var(--blue);">📡 SUBMIT_INTEL: ANONYMOUS_TIP_LINE</div>
-    <div class="mission-details" style="margin-bottom: 15px;">
-        Detected a Dark Web node? Found a scam center? Enter the target URL or Sector ID below. 
-        Dr. Azul will begin decryption upon receipt.
-    </div>
-    
-    <div style="display: flex; gap: 10px;">
-        <input type="text" id="intel-input" placeholder="TARGET_URL_OR_ID..." 
-            style="flex: 2; background: #111; border: 1px solid var(--blue); color: var(--blue); padding: 10px; font-family: 'Courier New'; font-size: 10px; outline: none;">
-        <button onclick="submitIntel()" 
-            style="flex: 1; background: var(--blue); border: none; color: #000; font-family: 'Courier New'; font-weight: bold; cursor: pointer; font-size: 10px;">
-            [ SEND_INTEL ]
-        </button>
-    </div>
-    <div id="intel-status" style="margin-top: 10px; font-size: 9px; color: var(--blue); display: none;"></div>
-</div>
-
-<div style="text-align: center; padding: 40px 0;">
-    <a href="https://maximumreality.github.io/backdoor/" style="color:var(--alert-red); text-decoration: none; font-size: 10px;">[ RETURN_TO_BACKDOOR ]</a>
-</div>
 
 <script>
     let isMuted = false;
@@ -149,74 +73,38 @@
     function toggleMute() {
         isMuted = !isMuted;
         const btn = document.getElementById('sound-toggle');
-        const iframe = document.getElementById('intro-vid');
-        const evidenceVid = document.getElementById('evidence-video');
-        
-        if (isMuted) {
-            btn.innerText = "🔇 Sound: OFF";
-            btn.style.borderColor = "#666"; btn.style.color = "#666";
-            iframe.src = iframe.src.replace("mute=0", "mute=1");
-            evidenceVid.muted = true;
-        } else {
-            btn.innerText = "🔈 Sound: ON";
-            btn.style.borderColor = "var(--alert-red)"; btn.style.color = "var(--alert-red)";
-            iframe.src = iframe.src.replace("mute=1", "mute=0");
-            evidenceVid.muted = false;
-        }
+        btn.innerText = isMuted ? "🔇 Sound: OFF" : "🔈 Sound: ON";
+        btn.style.color = isMuted ? "#666" : "var(--alert-red)";
+        document.getElementById('intro-vid').src += "&mute=1";
     }
 
     function initiateHackerLab() {
         if (!isMuted) {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'square';
-            osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.5);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            osc.start(); osc.stop(audioCtx.currentTime + 0.5);
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            osc.type = 'square'; osc.frequency.setValueAtTime(880, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.5);
+            g.gain.setValueAtTime(0.1, ctx.currentTime);
+            osc.connect(g); g.connect(ctx.destination);
+            osc.start(); osc.stop(ctx.currentTime + 0.5);
         }
-        const splash = document.getElementById('meta-splash');
-        splash.style.opacity = '0';
-        setTimeout(() => { splash.remove(); }, 1500);
+        document.getElementById('meta-splash').style.opacity = '0';
+        setTimeout(() => { document.getElementById('meta-splash').remove(); }, 1500);
     }
 
-    function toggleEvidence() {
-        const v = document.getElementById('evidence-video');
-        const btn = event.target;
-        if (v.paused) {
-            v.play();
-            v.muted = isMuted;
-            btn.innerText = "[ PAUSE_FEED ]";
-        } else {
-            v.pause();
-            btn.innerText = "[ VIEW_DECRYPTED_FEED ]";
-        }
+    function toggleVid(id) {
+        const v = document.getElementById(id);
+        v.muted = isMuted;
+        v.paused ? v.play() : v.pause();
     }
 
-        function submitIntel() {
-        const input = document.getElementById('intel-input');
+    function submitIntel() {
         const status = document.getElementById('intel-status');
-        
-        if (input.value.length < 3) return;
-
-        // Play the hacker beep if sound is ON
-        if (!isMuted) initiateHackerLab();
-
         status.style.display = 'block';
-        status.innerText = "> UPLOADING_INTEL...";
-        
-        setTimeout(() => {
-            status.innerText = "> DATA_RECEIVED. ENCRYPTING_ORIGIN_IP...";
-            setTimeout(() => {
-                status.innerText = "> SUCCESS: DR. AZUL HAS ADDED TARGET TO THE QUEUE. 🐾";
-                input.value = "";
-            }, 2000);
-        }, 1500);
+        status.innerText = "> UPLOADING...";
+        setTimeout(() => { status.innerText = "> SUCCESS: AZUL IS ON THE TRAIL. 🐾"; }, 2000);
     }
-
 </script>
 </body>
 </html>
