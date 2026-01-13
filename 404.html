@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | SIGNAL_LOST</title>
+    <style>
+        :root { --alert-red: #ff3131; --terminal-white: #e0e0e0; --bg-deep: #050505; --blue: #00e5ff; }
+        * { margin:0; padding:0; box-sizing: border-box; background: var(--bg-deep); }
+        body { font-family: 'Courier New', monospace; color: var(--terminal-white); display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; padding: 20px; }
+
+        .glitch-header { 
+            font-size: 50px; 
+            color: var(--alert-red); 
+            font-weight: 900; 
+            text-shadow: 2px 2px #fff; 
+            animation: jitter 0.1s infinite;
+        }
+
+        @keyframes jitter {
+            0% { transform: translate(0,0); }
+            25% { transform: translate(-2px, 2px); }
+            50% { transform: translate(2px, -1px); }
+            100% { transform: translate(0,0); }
+        }
+
+        .status-box { 
+            border: 1px solid var(--alert-red); 
+            padding: 20px; 
+            margin: 20px; 
+            max-width: 400px;
+            border-left: 8px solid var(--alert-red);
+        }
+
+        .typing { 
+            font-size: 13px; 
+            color: var(--alert-red); 
+            margin-bottom: 15px;
+            min-height: 40px;
+        }
+
+        .log-text { font-size: 11px; color: #666; line-height: 1.6; }
+
+        .btn-reconnect { 
+            margin-top: 30px; 
+            border: 1px solid var(--blue); 
+            padding: 10px 20px; 
+            color: var(--blue); 
+            text-decoration: none; 
+            font-size: 10px; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(0, 229, 255, 0.05);
+        }
+
+        .btn-reconnect:active { background: var(--blue); color: #000; }
+    </style>
+</head>
+<body>
+
+    <h1 class="glitch-header">SIGNAL_LOST</h1>
+
+    <div class="status-box">
+        <p style="font-size: 9px; color: var(--blue); margin-bottom: 10px;">[!] WARNING: NODE_COMPROMISED</p>
+        <div id="error-msg" class="typing"></div>
+        <p class="log-text">
+            The coordinate you requested has been scrubbed by the Ghost Protocol. 
+            Azul has purged the server logs to prevent tracking. 
+            <br><br>
+            <span style="color: #fff;">[ STATUS ]: ENCRYPTION_FAILED</span>
+        </p>
+    </div>
+
+    <a href="index.html" class="btn-reconnect">📡 RE-ESTABLISH_UPLINK</a>
+
+    <script>
+        const msg = "> ERROR: SIFUENTES_BYPASS_FAILED... \n> TARGET_SECTOR_NOT_FOUND.";
+        let i = 0;
+        function type() {
+            if (i < msg.length) {
+                document.getElementById('error-msg').innerHTML += msg.charAt(i);
+                i++;
+                setTimeout(type, 50);
+            }
+        }
+        window.onload = type;
+    </script>
+
+</body>
+</html>
